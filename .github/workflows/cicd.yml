@@ -1,4 +1,4 @@
-name: Node + PostgreSQL CI
+name: Node + PostgreSQL CI/CD
 
 on:
   push:
@@ -20,19 +20,29 @@ jobs:
           - 5432:5432
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Setup Node
-        uses: actions/setup-node@v3
+      - uses: actions/setup-node@v3
         with:
           node-version: "18"
 
-      - name: Install dependencies
-        run: npm install
+      - run: npm install
+      - run: sleep 5
+      - run: npm test
 
-      - name: Wait for DB
-        run: sleep 5
+  deploy:
+    needs: test   # 🔥 IMPORTANT
+    runs-on: ubuntu-latest
 
-      - name: Run tests
-        run: npm test
+    steps:
+      - name: Deploy to local machine
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            cd /home/your-username/Desktop/mynodeapp
+            git pull
+            npm install
+            pm2 restart app || pm2 start app.js
