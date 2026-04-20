@@ -10,7 +10,7 @@ on:
 jobs:
 
     test:
-        runs-on: ubuntu:latest
+        runs-on: ubuntu-latest
         services:
             postgres:
                 image: postgres
@@ -20,16 +20,16 @@ jobs:
                     POSTGRES_DB: db
                     ports:
                         5432:5432
- steps:
-    - name: checkout code
-      uses: actions/checkout@v3
-    - name: setup node
+    steps:
+     - name: checkout code
+       uses: actions/checkout@v3
+     - name: setup node
       uses: actions/setup-node@v3
       with:
         node-version: "18"
-    - name: install dependecies
-      run: npm install
-    - name: wait for db
-      run: sleep 5
-    - name: run tests
-      run: npm test
+     - name: install dependecies
+       run: npm install
+     - name: wait for db
+       run: sleep 5
+     - name: run tests
+       run: npm test
