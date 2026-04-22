@@ -37,7 +37,7 @@ if (require.main === module) {
 
   initDB().then(() => {
     app.listen(port,'0.0.0.0', () => {
-      console.log(`Server running on port ${port}`);
+      console.log(`Server running on IPv4 0.0.0.0:3000`);
     });
   });
 }
