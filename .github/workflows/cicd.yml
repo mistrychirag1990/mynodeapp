@@ -36,6 +36,7 @@ jobs:
   deploy:
     needs: test
     runs-on: ubuntu-latest
+    environment: main
 
     steps:
       - name: Deploy to local machine
