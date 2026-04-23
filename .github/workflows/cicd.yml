@@ -73,7 +73,7 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.REMOTE_SSH_KEY }}
-          port: 22
+          port: 2222
           script: |
             cd /home/inventam/Desktop/mynodeapp
             npm install
