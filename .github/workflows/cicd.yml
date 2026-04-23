@@ -47,22 +47,22 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
+      - name: Run Test
         run: |
          npm run test || echo "No tests found"
 
       # -------------------------
       # DEPLOY
       # -------------------------
-      - name: Deploy to Beta Server
-        uses: easingthemes/ssh-deploy@main
+      - name: Copy files to server
+        uses: appleboy/scp-action@v0.1.7
         with:
-          SSH_PRIVATE_KEY: ${{ secrets.REMOTE_SSH_KEY }}
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_USER: ${{ secrets.REMOTE_USER }}
-          REMOTE_PORT: 2222
-          TARGET: /home/inventam/Desktop/mynodeapp
-          SOURCE: './'
+         host: ${{ secrets.REMOTE_HOST }}
+         username: ${{ secrets.REMOTE_USER }}
+         key: ${{ secrets.REMOTE_SSH_KEY }}
+         port: 2222
+         source: "."
+         target: "/home/inventam/Desktop/mynodeapp"
 
       # -------------------------
       # REMOTE EXECUTION
