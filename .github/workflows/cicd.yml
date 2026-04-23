@@ -49,9 +49,7 @@ jobs:
 
       - name: Build project
         run: |
-          npm start
-          
-          
+          npm run start
 
       # -------------------------
       # DEPLOY
