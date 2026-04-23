@@ -62,7 +62,7 @@ jobs:
         with:
          host: ${{ secrets.REMOTE_HOST }}
          username: ${{ secrets.REMOTE_USER }}
-         key: ${{ fromBase64(secrets.REMOTE_SSH_KEY_BASE64) }}
+         key: ${{ secrets.REMOTE_SSH_KEY }}
          port: 2222
          source: "."
          target: "/home/inventam/Desktop/mynodeapp"
@@ -75,7 +75,7 @@ jobs:
         with:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
-          key: ${{ fromBase64(secrets.REMOTE_SSH_KEY_BASE64) }}
+          key: ${{ secrets.REMOTE_SSH_KEY }}
           port: 2222
           script: |
             cd /home/inventam/Desktop/mynodeapp
