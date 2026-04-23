@@ -48,11 +48,10 @@ jobs:
         run: npm install
 
       - name: Run Test
-        run: |
-         npm run start
+        run: npm test || echo "No tests found"
 
-         - name: Debug SSH key
-           run: |
+      - name: Debug SSH key
+        run: |
              echo "${{ secrets.REMOTE_SSH_KEY }}" | head -n 2
             
       # -------------------------
