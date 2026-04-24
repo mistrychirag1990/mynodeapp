@@ -65,7 +65,7 @@ jobs:
          key: ${{ secrets.REMOTE_SSH_KEY }}
          port: 2222
          source: "."
-         target: "/home/inventam/Desktop/mynodeapp"
+         target: "/home/inventam/Desktop/mynode"
 
       # -------------------------
       # REMOTE EXECUTION
@@ -78,7 +78,7 @@ jobs:
           key: ${{ secrets.REMOTE_SSH_KEY }}
           port: 2222
           script: |
-            cd /home/inventam/Desktop/mynodeapp
+            cd /home/inventam/Desktop/mynode
             npm install
             pm2 stop myapp || true
             pm2 reload myapp || pm2 start -n myapp npm -- start
