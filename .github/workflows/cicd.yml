@@ -79,6 +79,9 @@ jobs:
           port: 2222
           script: |
             cd /home/inventam/Desktop/mynode
+            /home/inventam/.nvm/versions/node/v20.20.2/bin/npm install
+            /home/inventam/.nvm/versions/node/v20.20.2/bin/pm2 stop myapp || true
+            /home/inventam/.nvm/versions/node/v20.20.2/bin/pm2 reload myapp || /home/inventam/.nvm/versions/node/v20.20.2/bin/pm2 start -n myapp /home/inventam/.nvm/versions/node/v20.20.2/bin/npm -- start
             npm install
             pm2 stop myapp || true
             pm2 reload myapp || pm2 start -n myapp npm -- start
