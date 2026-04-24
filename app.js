@@ -26,7 +26,7 @@ async function initDB() {
 
 // routes
 app.get('/', (req, res) => {
-  res.send("Node + PostgreSQL App 🚀");
+  res.send("Node + PostgreSQL App ");
 });
 
 module.exports = app;
