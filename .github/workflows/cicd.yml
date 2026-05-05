@@ -17,28 +17,14 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      # -------------------------
-      # CREATE ENV FILE
-      # -------------------------
-      - name: Create .env from GitHub Environment
-        run: |
-          touch .env
-          echo HOST=${{ secrets.HOST }} >> .env
-          echo PORT=${{ secrets.PORT }} >> .env
-          echo DB_TYPE=${{ secrets.DB_TYPE }} >> .env
-          echo DB_HOST=${{ secrets.DB_HOST }} >> .env
-          echo DB_PORT=${{ secrets.DB_PORT }} >> .env
-          echo DB_USERNAME=${{ secrets.DB_USERNAME }} >> .env
-          echo DB_PASSWORD=${{ secrets.DB_PASSWORD }} >> .env
-          echo DB_NAME=${{ secrets.DB_NAME }} >> .env
-          
+
       # -------------------------
       # SETUP NODE
       # -------------------------
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '22.12.0'
+          node-version: '22.22.2'
           cache: 'npm'
 
       # -------------------------
@@ -63,9 +49,9 @@ jobs:
          host: ${{ secrets.REMOTE_HOST }}
          username: ${{ secrets.REMOTE_USER }}
          key: ${{ secrets.REMOTE_SSH_KEY }}
-         port: 2222
+         port: 22
          source: "."
-         target: "/home/inventam/Desktop/mynode"
+         target: "/home/ec2-user/mynode"
 
       # -------------------------
       # REMOTE EXECUTION
@@ -76,10 +62,10 @@ jobs:
           host: ${{ secrets.REMOTE_HOST }}
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.REMOTE_SSH_KEY }}
-          port: 2222
+          port: 22
           script: |
-            export PATH="/home/inventam/.nvm/versions/node/v20.20.2/bin:$PATH"
-            cd /home/inventam/Desktop/mynode
+            export PATH="/home/ec2-user/.nvm/versions/node/v22.22.2/bin:$PATH"
+            cd /home/ec2-user/mynode
             npm install
             pm2 stop myapp || true
             pm2 reload myapp || pm2 start -n myappserver npm -- start
